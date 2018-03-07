@@ -1,6 +1,5 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, redirect
 from flask_pymongo import PyMongo
-import requests
 import tweepy
 
 
@@ -25,6 +24,11 @@ def index():
 def applicant():
     return render_template('applicant_Data_Entry.html')
 
+@app.route('/submit_form', methods=['POST'])
+def submit_form():
+    user = request.form
+    print (user)
+    return redirect('/', user=user)
 
 
 if __name__ == "__main__":
