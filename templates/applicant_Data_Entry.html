@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>TechFair LA - Applicant Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="static/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-12">
+            <h2>Your Preferences</h2>
+            <h5>Enter your preferences to improve your job match.</h5>
+            <hr>
+            <h5><span class="label label-primary">Part 1.</span><br></h5>
+        </div>
+    </div>
+        <form role="form" action="/submit_form">
+            <div class ="form-group">
+                <div class="row data-entry">
+                    <div class = "col-sm-3">
+                        <p>First Name:</p>
+                        <input type="text" name="firstname">
+                    </div>
+                    <div class = "col-sm-3">
+                        <p>Last Name: </p>
+                        <input type="text" name="lastname">
+                    </div>
+                </div>
+                <div class = "row data-entry">
+                    <div class = "col-sm-3">
+                        <p>Email: </p>
+                        <input type="text" name="email">
+                    </div>
+                    <div class = "col-sm-3">
+                        <p>Twitter: </p>
+                        <input type = "text" name="twitter">
+                    </div>
+
+                    <div class = "col-sm-3">
+                        <p>GitHub: </p>
+                        <input type = "text" name="github">
+                    </div>
+                </div>
+                <div class = "data-entry">
+                    <h3>Preferred Company Size</h3>
+                </div>
+                <div class = "row data-entry">
+                    <div class = "col-sm-2">
+                        <input type= "radio" id="company_size1" name="company_size" value="1">
+                        <label for="company_size1">Very Small/Startup</label>
+                    </div>
+                    <div class = "col-sm-2">
+                        <input type= "radio" id="company_size2" name="company_size" value="2">
+                        <label for="company_size2" class="data-entry">Small (less than 50 employees)</label>
+                    </div>
+                    <div class = "col-sm-2">
+                         <input type= "radio" id="company_size3" name="company_size" value="3">
+                        <label for="company_size3" class = "data-entry">Medium (51-500 employees)</label>
+                    </div>
+                    <div class = "col-sm-2">
+                        <input type= "radio" id="company_size4" name="company_size" value="4">
+                        <label for="company_size4" class="data-entry">Large (501 or more employees)</label>
+                    </div>
+                </div>
+                <div class = "data-entry">
+                    <h3>Minimum Compensation Score</h3>
+                </div>
+                <div class = "row data-entry">
+                    <div class = "col-sm-2">
+                        <input type= "radio" id="compensation1" name="compensation" value="1">
+                        <label for="compensation1" class="data-entry">A</label>
+                    </div>
+                    <div class = "col-sm-2">
+                        <input type= "radio" id="compensation2" name="compensation" value="2">
+                        <label for="compensation2" class="data-entry">B</label>
+                    </div>
+                    <div class = "col-sm-2">
+                        <input type= "radio" id="compensation3" name="compensation" value="3">
+                        <label for="compensation3" class="data-entry">C</label>
+                    </div>
+                    <div class = "col-sm-2">
+                        <input type= "radio" id="compensation4" name="compensation" value="4">
+                        <label for="compensation4" class="data-entry">D</label>
+                    </div>
+                </div>
+                <div class = "row data-entry">
+                    <div class = "col-sm-11">
+                        <button type = "submit" class="btn btn-success data-entry">Submit</button>
+                    </div>
+                </div> <!-- end of row -->
+            </form>
+</div> <!-- end of container -->
+
+
+<footer class="container-fluid data-entry">
+  <p>TechFair LA - Contact Info</p>
+</footer>
+</body>
+</html>
