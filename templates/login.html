@@ -1,0 +1,39 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Job Dating</title>
+</head>
+<body>
+    {% if messages %}
+        <ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+        </ul>
+    {% endif %}
+    <fieldset>
+        <legend>Registration</legend>
+        <form action="/registration" method="post">
+            {% csrf_token %}
+            First Name: <input type="text" name="first_name"><br>
+            Last Name: <input type="text" name="last_name"><br>
+            Email: <input type="email" name="email"><br>
+            Password: <input type="password" name="password"><br>
+            Confirm PW: <input type="password" name="confirm_password"><br>
+            <button type="submit">Register</button>
+        </form>
+    </fieldset>
+    <fieldset>
+        <legend>Login</legend>
+        <form action="/login" method="post">
+            {% csrf_token %}
+            Email: <input type="email" name="email"><br>
+            Password: <input type="password" name="password"><br>
+            <button type="submit">Login</button>
+        </form>
+    </fieldset>
+    
+</body>
+</html>
