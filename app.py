@@ -28,7 +28,7 @@ def applicant():
 def submit_form():
     user = request.form
     print (user)
-    return redirect('/', user=user)
+    return render_template('index.html', user=user)
 
 
 if __name__ == "__main__":
