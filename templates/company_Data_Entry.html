@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>TechFair LA - Company Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-12">
+            <h2>Company Information</h2>
+            <h5>Please enter the location of the job opening.</h5>
+            <hr>
+            <h5><span class="label label-primary">Part 1.</span><br></h5>
+        </div>
+    </div>
+        <form role="form" action="/submit_company_form" method="POST">
+            <div class ="form-group">
+                <div class="row data-entry">
+                    <div class = "col-sm-3">
+                        <p>Company Name</p>
+                        <input type="text" name="name">
+                    </div>
+                </div>
+                <div class= "row data-entry">
+                    <div class = "col-sm-3">
+                        <p>Street Address</p>
+                        <input type="text" name="street">
+                    </div>
+                </div>
+                <div class = "row data-entry">
+                    <div class = "col-sm-3">
+                        <p>City</p>
+                        <input type = "text" name="city">
+                    </div>
+                    <div class = "col-sm-3">
+                        <p>State</p>
+                        <input type = "text" name="state">
+                    </div>
+                </div>
+                <div class = "row data-entry">
+                    <div class = "col-sm-11">
+                        <button type = "submit" class="btn btn-success data-entry">Submit</button>
+                    </div>
+                </div> <!-- end of row -->
+            </form>
+</div> <!-- end of container -->
+
+
+<footer class="container-fluid data-entry">
+  <p>TechFair LA - Contact Info</p>
+</footer>
+</body>
+</html>

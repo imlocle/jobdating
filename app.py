@@ -45,6 +45,17 @@ def logout():
     session.pop('username', None)
     return redirect('/')
 
+@app.route('/companydataentry')
+def company():
+    return render_template('company_Data_Entry.html')
+
+@app.route('/submit_company_form', methods=['POST'])
+def submit_company_form():
+    company = request.form
+    session['company'] = company
+    return render_template('show_company_data.html', company=company)
+
+
 tweet_data = {
     "tweet_source": [],
     "tweet_text": [],
@@ -76,8 +87,8 @@ def twitter_dataframe(username):
             emptylist.append(analyzer.polarity_scores(tweet["text"]))
 
     # Pandas dataframe
-    tweet_df = pd.DataFrame(tweet_data, columns=["tweet_source", 
-                                             "tweet_text", 
+    tweet_df = pd.DataFrame(tweet_data, columns=["tweet_source",
+                                             "tweet_text",
                                              "tweet_date",
                                              "tweet_vader_score",
                                              "tweet_pos_score",
