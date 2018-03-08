@@ -1,9 +1,10 @@
-from flask import Flask, render_template, jsonify, request, redirect
+from flask import Flask, url_for, render_template, jsonify, request, redirect, session
 from flask_pymongo import PyMongo
 import tweepy
 
 
 app = Flask(__name__)
+app.secret_key = 'LA Hackathon!'
 mongo = PyMongo(app)
 
 tweet_data = {
@@ -18,7 +19,11 @@ tweet_data = {
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    if 'username' in session:
+        username = session['username']
+        return render_template('index.html', username=username)
+    else:
+        return render_template('index.html')
 
 @app.route('/applicantdataentry')
 def applicant():
@@ -27,8 +32,13 @@ def applicant():
 @app.route('/submit_form', methods=['POST'])
 def submit_form():
     user = request.form
-    print (user)
-    return redirect('/', user=user)
+    session['username'] = user
+    return redirect(url_for('index'))
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect('/')
 
 
 if __name__ == "__main__":
