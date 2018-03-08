@@ -1,6 +1,6 @@
 var myMap = L.map("map", {
     center: [37.7747511, -122.4590902],
-    zoom: 6
+    zoom: 1
     });
 
 // Add a tile layer
@@ -21,16 +21,19 @@ L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/
 // for loop to create a list of store locations
 
 var cities = [{
-  company:     "Indeed.com",
-  lat_lon:       [30.2672, -97.7431],
+  company: "Indeed.com",
+  lat_lon: [30.2672, -97.7431],
+  city:   "Austin, TX"
 },
 {
   company:     "Costco",
   lat_lon:       [47.5301, -122.0326],
+  city: "Issaquah, WA"
 },
 {
   company:     "Google",
   lat_lon:       [37.7749, -122.4194],
+  city: "San Francisco, CA"
 }];
 
 
@@ -64,6 +67,6 @@ var cities = [{
   for (var i = 0; i < cities.length; i++) {
     var city = cities[i];
     L.marker(city.lat_lon)
-      .bindPopup("<p>" + city.company + "</p>")
+      .bindPopup("<p>" + city.company + "</p><br><p>"+ city.city + "</p>")
       .addTo(myMap);
   }
