@@ -1,5 +1,5 @@
 from flask import Flask, url_for, render_template, jsonify, request, redirect, session
-from flask_pymongo import PyMonggoit
+from flask_pymongo import PyMongo
 import pandas as pd
 import tweepy
 
