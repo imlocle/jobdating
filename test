@@ -1,0 +1,5 @@
+import twitter_scrape
+import back_end
+
+job_seeker_culture = twitter_scrape(kobebryant)
+pred = back_end.lukes_function(firstname, lastname, street, city, state, job_seeker_culture)      

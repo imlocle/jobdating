@@ -2,7 +2,7 @@ from flask import Flask, url_for, render_template, jsonify, request, redirect, s
 import pymongo
 from companylist import *
 import scrape_twitter
-import datamining
+import back_end
 
 app = Flask(__name__)
 #session secret key
@@ -23,9 +23,12 @@ def index():
         street = username['street']
         city = username['city']
         state = username['state']
+        #calculate job seeker culture
+        job_seeker_culture = scrape_twitter.twitter_dataframe(twitter)
         #User's location
-        datamining.userlocation(firstname, lastname, street, city, state)      
-        print(datamining.companies(companylist, 50))
+        # output predictions
+        pred = back_end.lukes_function(firstname, lastname, street, city, state, job_seeker_culture)      
+        #print(pred)
         return render_template('index.html', username=username)
     else:
         return render_template('index.html')
