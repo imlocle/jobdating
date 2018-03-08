@@ -41,38 +41,5 @@ def submit_company_form():
     session['company'] = company
     return render_template('show_company_data.html', company=company)
 
-def twitter_dataframe(username):
-    tweet_data = {
-    "tweet_source": [],
-    "tweet_text": [],
-    "tweet_date": [],
-    "tweet_vader_score": [],
-    "tweet_neg_score": [],
-    "tweet_pos_score": [],
-    "tweet_neu_score": []}
-    for x in range(5):
-        tweets = api.user_timeline(username, page=x)
-        for tweet in tweets:
-            # All data is grabbed from the JSON returned by Twitter
-            tweet_data["tweet_source"].append(tweet["user"]["name"])
-            tweet_data["tweet_text"].append(tweet["text"])
-            tweet_data["tweet_date"].append(tweet["created_at"])
-
-            # Run sentiment analysis on each tweet using Vader
-            tweet_data["tweet_vader_score"].append(analyzer.polarity_scores(tweet["text"])["compound"])
-            tweet_data["tweet_pos_score"].append(analyzer.polarity_scores(tweet["text"])["pos"])
-            tweet_data["tweet_neu_score"].append(analyzer.polarity_scores(tweet["text"])["neu"])
-            tweet_data["tweet_neg_score"].append(analyzer.polarity_scores(tweet["text"])["neg"])
-            emptylist.append(analyzer.polarity_scores(tweet["text"]))
-
-    # Pandas dataframe
-    tweet_df = pd.DataFrame(tweet_data, columns=["tweet_source",
-                                             "tweet_text",
-                                             "tweet_date",
-                                             "tweet_vader_score",
-                                             "tweet_pos_score",
-                                             "tweet_neu_score",
-                                             "tweet_neg_score"])
-
 if __name__ == "__main__":
     app.run(debug=True)
