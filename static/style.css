@@ -1,20 +1,34 @@
-    .enhance {
-      font-weight: bold;
-    }
+.enhance {
+  font-weight: bold;
+}
 
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-    }
+/* Set black background color, white text and some padding */
+footer {
+  background-color:lightgrey;
+  color: white;
+  padding: 15px;
+}
 
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .row.content {height: auto;}
-    }
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+  .row.content {height: auto;}
+}
 
-    .data-entry {
-      margin-top: 15px;
-    }
+.data-entry {
+  margin-top: 15px;
+}
+
+div.headline {
+  text-align: center;
+  vertical-align: center;
+  padding-top: 10px;
+  background-color: lightgrey;
+  height: 100px;
+}
+.header {
+  color: #f0f0f0;
+}
+.redline {
+  color: #FF0000;
+}
 

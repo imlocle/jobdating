@@ -19,6 +19,9 @@
     </style>
 </head>
 <body>
+    <div class = "headline">
+        <h1 class="header">Job<span class="redline">Dating</span></h1>
+    </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
                 <a class="navbar-brand" href="/">Home</a>
@@ -123,6 +126,8 @@
                 <script type="text/javascript" src="{{ url_for('static', filename='style.js') }}"></script>
             </div>
         </div>
+        {% else %}
+        <h1>Let's find a Date!</h1>
         {% endif %} <!-- end of "username exists" conditional at beginning -->
     </div> <!-- end of container -->
 <footer class="container-fluid data-entry">
