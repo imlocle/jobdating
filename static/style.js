@@ -23,17 +23,20 @@ L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/
 var cities = [{
   company: "Indeed.com",
   lat_lon: [30.2672, -97.7431],
-  city:   "Austin, TX"
+  city:   "Austin, TX",
+  match: "85%"
 },
 {
   company:     "Costco",
   lat_lon:       [47.5301, -122.0326],
-  city: "Issaquah, WA"
+  city: "Issaquah, WA",
+  match: "74%"
 },
 {
   company:     "Google",
   lat_lon:       [37.7749, -122.4194],
-  city: "San Francisco, CA"
+  city: "San Francisco, CA",
+  match: "89%"
 }];
 
 
@@ -67,6 +70,6 @@ var cities = [{
   for (var i = 0; i < cities.length; i++) {
     var city = cities[i];
     L.marker(city.lat_lon)
-      .bindPopup("<p>" + city.company + "</p><br><p>"+ city.city + "</p>")
+      .bindPopup("<p>Name: " + city.company + "</p><br><p>City: "+ city.city + "</p><br><p>Match Rate: " + city.match +"</p>")
       .addTo(myMap);
   }
