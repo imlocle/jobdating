@@ -25,10 +25,8 @@ def index():
         state = username['state']
         #calculate job seeker culture
         job_seeker_culture = scrape_twitter.twitter_dataframe(twitter)
-        #User's location
-        # output predictions
-        pred = back_end.lukes_function(firstname, lastname, street, city, state, job_seeker_culture)      
-        #print(pred)
+        print("****************")  
+        #pred = back_end.lukes_function(firstname, lastname, street, city, state, job_seeker_culture) 
         return render_template('index.html', username=username)
     else:
         return render_template('index.html')
@@ -61,9 +59,9 @@ def submit_company_form():
 
 #NEED TO ADD DATA
 #CONNECTS WITH D3
-@app.route('/companyjson')
-def companyjson():
-    return jsonify()
+# @app.route('/companyjson')
+# def companyjson():
+#     return jsonify()
 
 if __name__ == "__main__":
     app.run(debug=True)

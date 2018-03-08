@@ -6,8 +6,6 @@ import requests
 from math import sin, cos, sqrt, atan2
 from companylist import *
 
-
-
 GOOGLE_MAPS_API_URL = 'https://maps.googleapis.com/maps/api/geocode/json'
 GOOGLE_MAPS_API_KEY = 'AIzaSyC219f2IComlGJoXk6zjLOjnY2vXsnmqz8' # ended up not using this
 
@@ -50,12 +48,17 @@ def get_job_seeker_coordinates(address, sensor=False, region='us'):
 
 def get_commute_distance(company_coordinates, job_seeker_coordinates):
     # curtesy of https://stackoverflow.com/questions/19412462/getting-distance-between-two-points-based-on-latitude-longitude
-    
+    lat1 = company_coordinates[0]
+    lat2 = job_seeker_coordinates[0]
+
+    lon1 = company_coordinates[1]
+    lon2 = job_seeker_coordinates[1]
+
     dlon = lon2 - lon1
     dlat = lat2 - lat1
     a = (sin(dlat/2))**2 + cos(lat1) * cos(lat2) * (sin(dlon/2))**2
     c = 2 * atan2(sqrt(a), sqrt(1-a))
-    distance = R * c
+    distance = 6373.0 * c
     return distance
     
 def get_company_data_frame(company_name):
@@ -120,7 +123,7 @@ def lukes_function(firstname, lastname, street, city, state, job_seeker_culture)
 		commute_distance = get_commute_distance(cc, jsc) # in kilometer
 
 		# get company and job seeker culture ratings (float between 0 and 1)
-		company_culture = overall_company_culture(company_df)
+		company_culture = overall_company_culture(df)
 		job_seeker_culture = scaling(job_seeker_culture)
 
 		samples.append([company_culture, 0, 0])
