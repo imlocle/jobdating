@@ -7,8 +7,10 @@
 </head>
 <body>
    <a href="/applicantdataentry">Application</a>
-   {% if user %}
-   <h1>Welcome {{user.firstname}}</h1>
+   {% if username %}
+   <a href="/logout">Log Out</a>
+   <h1>Welcome {{username.firstname}}</h1>
+    
    {% endif %}
 </body>
 </html>
