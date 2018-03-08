@@ -23,8 +23,8 @@ def index():
         state = username['state']
         #User's location
         datamining.userlocation(firstname, lastname, street, city, state)
+        
         print(datamining.companies(companylist, 50))
-        print("&&&&&&&&&&&&&&&&")
         return render_template('index.html', username=username)
     else:
         return render_template('index.html')
