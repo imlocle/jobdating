@@ -1,0 +1,41 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Job Dating</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+   {% if company %}
+   <a href="/logout">Log Out</a>
+   <h1>Company Profile for {{company.name}}</h1>
+   {% endif %}
+    <div class="container-fluid">
+
+        {% if company %}
+
+        {% if company.name %}
+        <div class = "row content">
+            <div class = "col-sm-1">Name:</div>
+            <div class = "col-sm-5 enhance">{{company.name}}</div>
+        </div><!-- end of name row -->
+        {% endif %}
+        {% if company.street %}
+        <div class = "row content">
+            <div class = "col-sm-1">Address:</div>
+            <div class = "col-sm-5 enhance">
+                {{company.street}}<br>
+                {{company.city}}, {{company.state}}
+            </div>
+        </div><!--end of email row -->
+        {% endif %}
+
+        {% endif %} <!-- end of "username exists" conditional at beginning -->
+    </div> <!-- end of container -->
+<footer class="container-fluid data-entry">
+  <p>TechFair LA - Contact Info</p>
+</footer>
+</body>
+</html>
