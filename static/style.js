@@ -1,5 +1,5 @@
 var myMap = L.map("map", {
-    center: [37.7747511, -122.4590902],
+    center: [33.7747511, -118.4590902],
     zoom: 6
     });
 
@@ -37,7 +37,14 @@ var cities = [{
   lat_lon:       [37.7749, -122.4194],
   city: "San Francisco, CA",
   match: "89%"
-}];
+},
+{
+  company:     "Lakers",
+  lat_lon:       [33.9165781, -118.4373346],
+  city: "El Segundo, CA",
+  match: "99%"
+}
+];
 
 
 // var cities = [{

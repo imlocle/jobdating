@@ -25,7 +25,6 @@ def index():
         state = username['state']
         #calculate job seeker culture
         job_seeker_culture = scrape_twitter.twitter_dataframe(twitter)
-        print("****************")  
         #pred = back_end.lukes_function(firstname, lastname, street, city, state, job_seeker_culture) 
         return render_template('index.html', username=username)
     else:
