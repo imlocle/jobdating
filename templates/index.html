@@ -8,22 +8,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-   <a href="/applicantdataentry">Application</a>
-   {% if username %}
-   <a href="/logout">Log Out</a>
-   <h1>Welcome {{username.firstname}}</h1>
-   {% endif %}
+    <a href="/applicantdataentry">Application</a>
+    {% if username %}
+    <a href="/logout">Log Out</a>
+    
     <div class="container-fluid">
         <h1>Applicant Profile</h1>
         <div class="row content">
             <div class = "col-sm-12">
-                <a href="/applicantdataentry">Application</a>
             </div> <!-- end of item div -->
         </div> <!-- end of row 1 div -->
-        {% if username %}
         <div class="row content">
             <div class= "col-sm-4">
-                <a href="/logout">Log Out</a>
             </div><!-- end of item div -->
         </div><!-- end of row 2 div -->
 

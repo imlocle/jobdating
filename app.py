@@ -1,6 +1,8 @@
 from flask import Flask, url_for, render_template, jsonify, request, redirect, session
 from flask_pymongo import PyMongo
+from companylist import *
 import scrape_twitter
+import datamining
 
 app = Flask(__name__)
 #session secret key
@@ -11,7 +13,18 @@ mongo = PyMongo(app)
 def index():
     if 'username' in session:
         username = session['username']
-        scrape_twitter.twitter_dataframe(username['twitter'])
+        twitter = username['twitter']
+        #scraping twitter
+        scrape_twitter.twitter_dataframe(twitter)
+        firstname = username['firstname']
+        lastname = username['lastname']
+        street = username['street']
+        city = username['city']
+        state = username['state']
+        #User's location
+        datamining.userlocation(firstname, lastname, street, city, state)
+        print(datamining.companies(companylist, 50))
+        print("&&&&&&&&&&&&&&&&")
         return render_template('index.html', username=username)
     else:
         return render_template('index.html')
