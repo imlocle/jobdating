@@ -8,8 +8,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container">
+                    <a class="navbar-brand" href="/">Home</a>
+                    <a class="navbar-brand" href="/applicantdataentry">Job Seeker</a>
+                    <a class="navbar-brand" href="/companydataentry">Company</a>
+                    {% if company %}
+                    <a class="navbar-brand" href="/logout">Log Out</a>
+                    {% endif %}
+                </div>
+        </nav>
    {% if company %}
-   <a href="/logout">Log Out</a>
    <h1>Company Profile for {{company.name}}</h1>
    {% endif %}
     <div class="container-fluid">

@@ -9,6 +9,15 @@ L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/
   "T6YbdDixkOBWH_k9GbS8JQ"
 ).addTo(myMap);
 
+
+d3.json('/companyjson', function(data){
+  for (var i = 0; i < data.length; i++){
+    var city = data[i];
+    L.marker(city.location)
+      .bindPopup("<p>" + city.name + "</p> <hr> <p>Population " + city.population + "</p>")
+      .addTo(myMap);
+  }
+});
 // for loop to create a list of store locations
 var cities = [{
     location: [40.7128, -74.0059],
