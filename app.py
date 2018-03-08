@@ -1,5 +1,5 @@
 from flask import Flask, url_for, render_template, jsonify, request, redirect, session
-from flask_pymongo import PyMongo
+import pymongo
 from companylist import *
 import scrape_twitter
 import datamining
@@ -7,7 +7,9 @@ import datamining
 app = Flask(__name__)
 #session secret key
 app.secret_key = 'LA Hackathon!'
-mongo = PyMongo(app)
+
+conn = 'mongodb://localhost:27017'
+client = pymongo.MongoClient(conn)
 
 @app.route('/')
 def index():
@@ -22,8 +24,7 @@ def index():
         city = username['city']
         state = username['state']
         #User's location
-        datamining.userlocation(firstname, lastname, street, city, state)
-        
+        datamining.userlocation(firstname, lastname, street, city, state)      
         print(datamining.companies(companylist, 50))
         return render_template('index.html', username=username)
     else:
@@ -53,6 +54,12 @@ def submit_company_form():
     company = request.form
     session['company'] = company
     return render_template('show_company_data.html', company=company)
+
+#NEED TO ADD DATA
+#CONNECTS WITH D3
+@app.route('/companyjson')
+def companyjson():
+    return jsonify()
 
 if __name__ == "__main__":
     app.run(debug=True)

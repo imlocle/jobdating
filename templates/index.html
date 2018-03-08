@@ -5,9 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Job Dating</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.js"></script>
     <style>
         #map{
             height: 80%;
@@ -16,10 +19,19 @@
     </style>
 </head>
 <body>
-    <a href="/applicantdataentry">Application</a>
-    {% if username %}
-    <a href="/logout">Log Out</a>
-    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="/">Home</a>
+                <a class="navbar-brand" href="/applicantdataentry">Job Seeker</a>
+                <a class="navbar-brand" href="/companydataentry">Company</a>
+                {% if username %}
+                <a class="navbar-brand" href="/logout">Log Out</a>
+                {% endif %}
+            </div>
+    </nav>
+        
+
+  {% if username %}
     <div class="container-fluid">
         <h1>Applicant Profile</h1>
         <div class="row content">
@@ -108,7 +120,7 @@
         </div> <!-- end of company size row -->
         <div class="row content">
             <div id="map"> <!-- creating map from leaflef -->
-                <script type="text/javascript" src="{{ url_for('static', filename='leaflet.js') }}"></script>
+                <script type="text/javascript" src="{{ url_for('static', filename='style.js') }}"></script>
             </div>
         </div>
         {% endif %} <!-- end of "username exists" conditional at beginning -->
