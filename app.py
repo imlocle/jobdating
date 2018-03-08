@@ -2,6 +2,13 @@ from flask import Flask, url_for, render_template, jsonify, request, redirect, s
 from flask_pymongo import PyMongo
 import pandas as pd
 import tweepy
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+
+app = Flask(__name__)
+#session secret key
+app.secret_key = 'LA Hackathon!'
+mongo = PyMongo(app)
+analyzer = SentimentIntensityAnalyzer()
 
 # Twitter API Keys
 consumer_key = "7uE7u3kJmZNSMk73PAUEDQOVI"
@@ -9,16 +16,10 @@ consumer_secret = "6pO6Q7RyFa8ahec7cTkyoM8j2clXAhdvX3zzOIZ6JOkY7BrQLI"
 access_token = "29085215-jxXOHQEszQXY6J36EfMH47uu2So0sCLHk5N3xI9ud"
 access_token_secret = "qFmWyNCGbcyhyOUPzdQ8NqB1HP6Lys9WEDOhe0nUNCQHs"
 
-
 # Setup Tweepy API Authentication
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth, parser=tweepy.parsers.JSONParser())
-
-app = Flask(__name__)
-#session secret key
-app.secret_key = 'LA Hackathon!'
-mongo = PyMongo(app)
 
 @app.route('/')
 def index():
