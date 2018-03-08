@@ -52,6 +52,7 @@ def company():
 @app.route('/submit_company_form', methods=['POST'])
 def submit_company_form():
     company = request.form
+    twitter = request.form['twitter']
     session['company'] = company
     return render_template('show_company_data.html', company=company)
 
