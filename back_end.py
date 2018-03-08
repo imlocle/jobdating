@@ -2,9 +2,11 @@ import pandas as pd
 import numpy as np
 from sklearn.neighbors import NearestNeighbors
 
+
 import requests
 from math import sin, cos, sqrt, atan2
 from companylist import *
+import datamining
 
 GOOGLE_MAPS_API_URL = 'https://maps.googleapis.com/maps/api/geocode/json'
 GOOGLE_MAPS_API_KEY = 'AIzaSyC219f2IComlGJoXk6zjLOjnY2vXsnmqz8' # ended up not using this
@@ -19,11 +21,15 @@ def get_company_coordinates(city, state, sensor=False, region='us'):
         'sensor' : sensor,
         'region' : region
     }
+
     
     # Do the request and get the response data
     req = requests.get(GOOGLE_MAPS_API_URL, params=params)
     res = req.json()
     
+    # print(res['results'])
+    # print('\n')
+
     # Use the first result
     result = res['results'][0]
     loc = result['geometry']['location']
@@ -62,7 +68,8 @@ def get_commute_distance(company_coordinates, job_seeker_coordinates):
     return distance
     
 def get_company_data_frame(company_name):
-    
+    company_name = company_name.lower().replace(" ", "-")
+    print(company_name)
     url = 'http://techfair-data.comparably.com/culture/' + company_name + '.json'
     df = pd.read_json(url)
     return df
@@ -104,50 +111,63 @@ def scaling(job_seeker_culture):
 # this returns 
 def lukes_function(firstname, lastname, street, city, state, job_seeker_culture):
 
-	job_seeker_full_name = str(firstname) + ' ' + str(lastname)
-
 	samples = []
 	company_names = []
 	lat_lons = []
 	distances_away = []
-	for company_name in companylist:
+	for company_name in datamining.companies(companylist, 25):
 
-		df = get_company_data_frame(company_name)
-		city = str(df['company']['location']['city'])
-		state = str(df['company']['location']['state'])
-		cc = get_company_coordinates(city, state)
+		try:
+			df = get_company_data_frame(company_name)
+			city = str(df['company']['location']['city'])
+			state = str(df['company']['location']['state'])
+			cc = get_company_coordinates(city, state)
 	
-		job_seeker_address = str(street) + ', ' + str(city) + ', ' + str(state)
-		jsc = get_job_seeker_coordinates(job_seeker_address)
+			job_seeker_address = str(street) + ', ' + str(city) + ', ' + str(state)
+			jsc = get_job_seeker_coordinates(job_seeker_address)
 
-		commute_distance = get_commute_distance(cc, jsc) # in kilometer
+			commute_distance = get_commute_distance(cc, jsc) # in kilometer
 
-		# get company and job seeker culture ratings (float between 0 and 1)
-		company_culture = overall_company_culture(df)
-		job_seeker_culture = scaling(job_seeker_culture)
+			# get company and job seeker culture ratings (float between 0 and 1)
+			company_culture = overall_company_culture(df)
+			job_seeker_culture = scaling(job_seeker_culture)
 
-		samples.append([company_culture, 0, 0])
-		company_names.append(company_name)
-		lat_lons.append([cc[0], cc[1]])
-		distances_away.append(commute_distance)
+			samples.append([company_culture, 0, 0])
+			company_names.append(company_name)
+			lat_lons.append([cc[0], cc[1]])
+			distances_away.append(commute_distance)
+
+		except:
+			continue
 
 	# training
-	k = 5
+	k = 3
 	search_radius = 0.4
 	neigh = NearestNeighbors(k, search_radius)
-	neigh.fit(samples)
+	samples2 = np.array(samples)
+	neigh.fit(samples2)
 
 	# prediction
-	prediction = neigh.kneighbors([[job_seeker_culture, 0, 0]], k, return_distance=True)
+	if len(samples2) > k:
+		prediction = neigh.kneighbors([[job_seeker_culture, 0, 0]], k, return_distance=True)
+
+	else:
+		prediction = [[], [[]]]
+		for i in range(k):
+			prediction[1][0].append(i)
+		prediction = np.array(prediction)
 
 	predicted_companies = []
 	predicted_lat_lons  = []
 	predicted_distances_away = []
 	for i in range(k):
-		index = prediction[1][0][i]
-		predicted_companies.append(company_names[index])
-		predicted_lat_lons.append(lat_lons[index])
-		predicted_distances_away.append(distances_away[index])
+		try:
+			index = prediction[1][0][i]
+			predicted_companies.append(company_names[index])
+			predicted_lat_lons.append(lat_lons[index])
+			predicted_distances_away.append(distances_away[index])
+		except:
+			pass
 
 	# pred = {"companies":[list_of_comp_names], "lat_lon": [[lat, lon], ....], "distance_away": [val1, val2]}
 	pred = {
