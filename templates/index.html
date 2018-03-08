@@ -4,13 +4,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Job Dating</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-   <a href="/applicantdataentry">Application</a>
-   {% if username %}
-   <a href="/logout">Log Out</a>
-   <h1>Welcome {{username.firstname}}</h1>
-    
-   {% endif %}
+    <div class="container-fluid">
+        <h1>Applicant Profile</h1>
+        <div class="row content">
+            <div class = "col-sm-12">
+                <a href="/applicantdataentry">Application</a>
+            </div> <!-- end of item div -->
+        </div> <!-- end of row 1 div -->
+        {% if username %}
+        <div class="row content">
+            <div class= "col-sm-4">
+                <a href="/logout">Log Out</a>
+            </div><!-- end of item div -->
+        </div><!-- end of row 2 div -->
+
+        <div class="row content">
+            <div class = "col-sm-6">
+                {% if username.firstname %}
+                <h2>Welcome, {{username.firstname}}!</h2>
+                {% endif %}
+            </div><!--end of item div -->
+        </div><!-- end of row 3 div -->
+        {% if username.firstname and username.lastname %}
+        <div class = "row content">
+            <div class = "col-sm-1">Name:</div>
+            <div class = "col-sm-5 enhance">{{username.firstname}} {{username.lastname}}</div>
+        </div><!-- end of name row -->
+        {% endif %}
+        {% if username.email %}
+        <div class = "row content">
+            <div class = "col-sm-1">Email:</div>
+            <div class = "col-sm-5 enhance">
+                {{username.email}}
+            </div>
+        </div><!--end of email row -->
+        {% endif %}
+        {% if username.twitter %}
+        <div class = "row content">
+            <div class = "col-sm-1">Twitter:</div>
+            <div class = "col-sm-5 enhance">{{username.twitter}}</div>
+        </div><!--end of twitter row -->
+        {% endif %}
+        {% if username.github %}
+        <div class = "row content">
+            <div class = "col-sm-1">GitHub:</div>
+            <div class = "col-sm-5 enhance">{{username.github}}</div>
+        </div><!-- end of github row -->
+        {% endif %}
+        {% if username.linkedin %}
+        <div class = "row content">
+            <div class = "col-sm-1">LinkedIn:</div>
+            <div class = "col-sm-5 enhance">{{username.linkedin}}</div>
+        </div><!-- end of linkedin row -->
+        {% endif %}
+        <div class = "row content">
+            <div class = "col-sm-6">Preferred Company Size:
+                <span class="enhance">
+                {% if username.company_size == "1" %}
+                Very Small / Startup
+                {% endif %}
+                {% if username.company_size == "2" %}
+                    Small
+                {% endif %}
+                {% if username.company_size == "3" %}
+                    Medium
+                {% endif %}
+                {% if username.company_size == "4" %}
+                    Large / Startup
+                {% endif %}
+                </span>
+                </div> <!-- end of company size item -->
+        </div> <!-- end of company size row -->
+        <div class = "row content">
+            <div class = "col-sm-6">Desired Compensation Score:
+                <span class="enhance">
+                {% if username.compensation == "1" %}
+                    A (highest)
+                {% endif %}
+                {% if username.compensation == "2" %}
+                    B (above average)
+                {% endif %}
+                {% if username.compensation == "3" %}
+                    C (average)
+                {% endif %}
+                {% if username.compensation == "4" %}
+                    D (below average)
+                {% endif %}
+                </span>
+            </div> <!-- end of company size item -->
+        </div> <!-- end of company size row -->
+        {% endif %} <!-- end of "username exists" conditional at beginning -->
+    </div> <!-- end of container -->
+<footer class="container-fluid data-entry">
+  <p>TechFair LA - Contact Info</p>
+</footer>
 </body>
 </html>
