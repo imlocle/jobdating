@@ -45,5 +45,5 @@ def twitter_dataframe(username):
                                              "tweet_pos_score",
                                              "tweet_neu_score",
                                              "tweet_neg_score"])
-    print(tweet_df.head())                               
+    #print(tweet_df.head())                               
     return tweet_df["tweet_vader_score"].mean()
