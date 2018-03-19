@@ -69,7 +69,7 @@ def get_commute_distance(company_coordinates, job_seeker_coordinates):
     
 def get_company_data_frame(company_name):
     company_name = company_name.lower().replace(" ", "-")
-    print(company_name)
+    #print(company_name)
     url = 'http://techfair-data.comparably.com/culture/' + company_name + '.json'
     df = pd.read_json(url)
     return df
@@ -157,23 +157,19 @@ def lukes_function(firstname, lastname, street, city, state, job_seeker_culture)
 			prediction[1][0].append(i)
 		prediction = np.array(prediction)
 
-	predicted_companies = []
-	predicted_lat_lons  = []
-	predicted_distances_away = []
+	recommendation = []
 	for i in range(k):
 		try:
+			#creating a json file
+			pred = {}
+			test = {}
 			index = prediction[1][0][i]
-			predicted_companies.append(company_names[index])
-			predicted_lat_lons.append(lat_lons[index])
-			predicted_distances_away.append(distances_away[index])
+			test["company"] = company_names[index]
+			test["lat_lon"] = lat_lons[index]
+			test["distance_away"] = distances_away[index]
+			pred["recommend"] = test
+			recommendation.append(test)
 		except:
 			pass
 
-	# pred = {"companies":[list_of_comp_names], "lat_lon": [[lat, lon], ....], "distance_away": [val1, val2]}
-	pred = {
-		'companies':     predicted_companies,
-		'lat_lon':       predicted_lat_lons,
-		'distance_away': predicted_distances_away
-	}
-
-	return pred
+	return recommendation

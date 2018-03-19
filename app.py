@@ -15,17 +15,6 @@ client = pymongo.MongoClient(conn)
 def index():
     if 'username' in session:
         username = session['username']
-        twitter = username['twitter']
-        #scraping twitter
-        scrape_twitter.twitter_dataframe(twitter)
-        firstname = username['firstname']
-        lastname = username['lastname']
-        street = username['street']
-        city = username['city']
-        state = username['state']
-        #calculate job seeker culture
-        job_seeker_culture = scrape_twitter.twitter_dataframe(twitter)
-        #pred = back_end.lukes_function(firstname, lastname, street, city, state, job_seeker_culture) 
         return render_template('index.html', username=username)
     else:
         return render_template('index.html')
@@ -37,7 +26,6 @@ def applicant():
 @app.route('/submit_form', methods=['POST'])
 def submit_form():
     user = request.form
-    twitter = request.form['twitter']
     session['username'] = user
     return redirect(url_for('index'))
 
@@ -56,11 +44,18 @@ def submit_company_form():
     session['company'] = company
     return render_template('show_company_data.html', company=company)
 
-#NEED TO ADD DATA
-#CONNECTS WITH D3
-# @app.route('/companyjson')
-# def companyjson():
-#     return jsonify()
+@app.route('/companyjson')
+def companyjson():
+    username = session['username']
+    twitter = username['twitter']
+    firstname = username['firstname']
+    lastname = username['lastname']
+    street = username['street']
+    city = username['city']
+    state = username['state']
+    job_seeker_culture = scrape_twitter.twitter_dataframe(twitter)
+    recommend = back_end.lukes_function(firstname, lastname, street, city, state, job_seeker_culture)
+    return jsonify(recommend)
 
 if __name__ == "__main__":
     app.run(debug=True)
